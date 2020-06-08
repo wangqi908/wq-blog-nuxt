@@ -2,6 +2,7 @@
   <div class="container">
     <!-- <List /> -->
     <button @click="$router.push({ path: '/post/view' })">跳转</button>
+    <button @click="loading">loading</button>
     <div class="test">aaa</div>
   </div>
 </template>
@@ -12,6 +13,11 @@
 export default {
   components: {
     // List
+  },
+  methods: {
+    loading() {
+      this.$loading.show()
+    }
   }
 }
 </script>
