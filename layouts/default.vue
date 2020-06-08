@@ -1,10 +1,44 @@
 <template>
-  <div>
-    <nuxt-link to="/">首页</nuxt-link>
-    <nuxt-link to="/post">文章</nuxt-link>
+  <div class="layout">
+    <Head class="header" />
     <nuxt />
+    <Foot class="footer" />
   </div>
 </template>
 
-<style>
+
+<script>
+import { Head, Foot } from '@/components'
+
+export default {
+  name: 'layout',
+  components: { Head, Foot }
+}
+</script>
+
+<style scoped lang='scss'>
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 60px;
+  background-color: $bgc;
+}
+
+.header {
+  flex: 0 0 auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.main-content {
+  @extend %page-common;
+  flex: 1 0 auto;
+  background-color: $bgc;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
 </style>

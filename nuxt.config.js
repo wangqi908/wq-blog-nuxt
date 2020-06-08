@@ -38,7 +38,8 @@ export default {
   // plugins: ['~/plugins/loading'],
   plugins: [
     { src: '~/plugins/loading', ssr: false },
-    { src: '~/plugins/localStorage.js', ssr: false }
+    { src: '~/plugins/localStorage.js', ssr: false },
+    { src: '~/components', ssr: false }
   ],
   /*
    ** Nuxt.js dev-modules
