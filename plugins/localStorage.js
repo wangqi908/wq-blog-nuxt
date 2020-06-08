@@ -3,7 +3,12 @@ import createPersistedState from 'vuex-persistedstate'
 export default ({ store }) => {
   window.onNuxtReady(() => {
     createPersistedState({
-      key: 'counter'
+      reducer(val) {
+        console.log(val)
+        return {
+          counter: val.counter
+        }
+      }
     })(store)
   })
 }

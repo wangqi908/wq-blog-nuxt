@@ -2,7 +2,7 @@ export default {
   mode: 'universal',
   proxy: {
     '/blog': {
-      target: 'http://192.168.10.106/blog',
+      target: 'http://127.0.0.1/blog',
       changeOrigin: true,
       pathRewrite: { '^/blog/': '' }
     }
@@ -76,5 +76,8 @@ export default {
      */
     // extend(config, ctx) {}
     vendor: ['axios']
+  },
+  router: {
+    middleware: 'stats'
   }
 }

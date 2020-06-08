@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { postViewReq } from '@/api'
 export default {
   data() {
     return {
@@ -14,15 +14,13 @@ export default {
     }
   },
   asyncData() {
-    return axios
-      .post(`/blog/post/view`, {
-        _id: '5ed5ddc30fbb844b24b4bcdb'
-      })
-      .then(res => {
-        // this.content = res.data.data.content
+    return postViewReq({
+      _id: '5ed5ddc30fbb844b24b4bcdb'
+    }).then(res => {
+      // this.content = res.data.data.content
 
-        return { content: res.data.data.content }
-      })
+      return { content: res.data.data }
+    })
   }
 }
 </script>

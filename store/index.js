@@ -1,3 +1,5 @@
+import { propListReq } from '@/api'
+
 export const state = () => ({
   counter: 0,
   isShowRightDom: false,
@@ -20,5 +22,20 @@ export const mutations = {
   },
   setPropList(state, payload) {
     state.propList = payload
+  }
+}
+
+export const actions = {
+  getPropListAction({ commit }, payload) {
+    if (this.state.propList.length !== 0) return
+    return new Promise(resolve => {
+      propListReq(payload).then(res => {
+        if (res.data.code === 200) {
+          let resData = res.data.data
+          commit('setPropList', resData)
+          resolve(resData)
+        }
+      })
+    })
   }
 }

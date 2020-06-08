@@ -13,7 +13,7 @@ import { mapMutations } from 'vuex'
 import { PostList } from '@/components'
 import { LeftSide, RightSide } from './components'
 import { throttle } from '@/utils'
-
+// import { propListReq } from '@/api'
 export default {
   name: 'home',
   components: { LeftSide, RightSide, PostList },
@@ -22,6 +22,12 @@ export default {
       smallWidth: 950
     }
   },
+  // asyncData() {
+  //   return propListReq({}).then(res => {
+  //     console.log(res)
+  //     // return { title: res }
+  //   })
+  // },
   methods: {
     ...mapMutations(['setShowRightDom']),
     watchClientWidth() {
@@ -40,6 +46,11 @@ export default {
   },
   mounted() {
     this.handleClientWidth()
+
+    // propListReq({}).then(res => {
+    //   console.log(res)
+    //   // return { title: res }
+    // })
   }
 }
 </script>
