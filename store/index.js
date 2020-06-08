@@ -1,5 +1,7 @@
 export const state = () => ({
-  counter: 0
+  counter: 0,
+  isShowRightDom: false,
+  propList: []
 })
 
 export const mutations = {
@@ -8,5 +10,15 @@ export const mutations = {
   },
   reset(state) {
     state.counter = 0
+  },
+  // 设置token
+  setToken(state, payload = '') {
+    state.token = payload
+  },
+  setShowRightDom(state, payload) {
+    state.isShowRightDom = payload
+  },
+  setPropList(state, payload) {
+    state.propList = payload
   }
 }

@@ -1,44 +1,59 @@
 <template>
-  <div class="container">
-    <!-- <List /> -->
-    <button @click="$router.push({ path: '/post/view' })">跳转</button>
-    <button @click="loading">loading</button>
-    <button @click="add">add</button>
-    <button @click="rerset">rerset</button>
-    <a class="icon-link" href="https://twitter.com/wangqifree" target="_blank">
-      <span class="iconfont icon-twitter"></span>
-    </a>
-    <Person />
+  <div class="home">
+    <LeftSide />
+    <div class="list">
+      <PostList />
+    </div>
+    <RightSide />
   </div>
 </template>
 
 <script>
-// import List from '@/components/List.vue'
-import { mapState, mapMutations } from 'vuex'
-import { Person } from '@/components'
+import { mapMutations } from 'vuex'
+import { PostList } from '@/components'
+import { LeftSide, RightSide } from './components'
+import { throttle } from '@/utils'
+
 export default {
-  components: {
-    Person
-  },
-  methods: {
-    ...mapMutations(['increment', 'reset']),
-    loading() {
-      this.$loading.show()
-    },
-    add() {
-      this.increment()
-    },
-    rerset() {
-      this.reset(0)
+  name: 'home',
+  components: { LeftSide, RightSide, PostList },
+  data() {
+    return {
+      smallWidth: 950
     }
   },
-  computed: {
-    ...mapState(['counter'])
+  methods: {
+    ...mapMutations(['setShowRightDom']),
+    watchClientWidth() {
+      let clientWidth = document.body.clientWidth
+      this.setShowRightDom(clientWidth < this.smallWidth)
+    },
+    handleClientWidth() {
+      this.watchClientWidth()
+      window.addEventListener(
+        'resize',
+        throttle(() => {
+          this.watchClientWidth()
+        }, 100)
+      )
+    }
+  },
+  mounted() {
+    this.handleClientWidth()
   }
 }
 </script>
 
-<style lang='scss'>
-.test {
+<style scoped lang='scss'>
+.home {
+  display: flex;
+  .list {
+    flex: 1;
+  }
+}
+@media (max-width: $small-width) {
+  .home {
+    display: block;
+  }
 }
 </style>
