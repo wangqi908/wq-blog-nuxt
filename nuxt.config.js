@@ -36,7 +36,10 @@ export default {
    ** Plugins to load before mounting the App
    */
   // plugins: ['~/plugins/loading'],
-  plugins: [{ src: '~/plugins/loading', ssr: false }],
+  plugins: [
+    { src: '~/plugins/loading', ssr: false },
+    { src: '~/plugins/localStorage.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
