@@ -1,17 +1,17 @@
 <template>
   <div class="container">
-    <List />
+    <!-- <List /> -->
     <button @click="$router.push({ path: '/post/view' })">跳转</button>
     <div class="test">aaa</div>
   </div>
 </template>
 
 <script>
-import List from '@/components/List.vue'
+// import List from '@/components/List.vue'
 
 export default {
   components: {
-    List
+    // List
   }
 }
 </script>

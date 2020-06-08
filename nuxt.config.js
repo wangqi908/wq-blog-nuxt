@@ -2,8 +2,9 @@ export default {
   mode: 'universal',
   proxy: {
     '/blog': {
-      target: 'http://192.168.10.106/',
-      changeOrigin: true
+      target: 'http://192.168.10.106/blog',
+      changeOrigin: true,
+      pathRewrite: { '^/blog/': '' }
     }
   },
 
@@ -57,7 +58,10 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true,
+    host: '/blog'
+  },
   /*
    ** Build configuration
    */
