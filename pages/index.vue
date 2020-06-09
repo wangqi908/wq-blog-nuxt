@@ -2,32 +2,49 @@
   <div class="home">
     <LeftSide />
     <div class="list">
-      <PostList />
+      <PostItem v-for="item in list" :key="item._id" :info="item" />
+
+      <Pagination
+        :total="count"
+        :pageSize="pageSize"
+        :currentPage.sync="currentPage"
+        @current-change="currentChange"
+      />
     </div>
     <RightSide />
   </div>
 </template>
 
 <script>
+import { postPageReq } from '@/api'
 import { mapMutations } from 'vuex'
-import { PostList } from '@/components'
-import { LeftSide, RightSide } from './components'
+import { LeftSide, RightSide, PostItem, Pagination } from '@/components'
 import { throttle } from '@/utils'
-// import { propListReq } from '@/api'
 export default {
   name: 'home',
-  components: { LeftSide, RightSide, PostList },
+  components: { LeftSide, RightSide, PostItem, Pagination },
   data() {
     return {
-      smallWidth: 950
+      smallWidth: 950,
+      list: [],
+      count: '',
+      currentPage: 1,
+      pageSize: 3
     }
   },
-  // asyncData() {
-  //   return propListReq({}).then(res => {
-  //     console.log(res)
-  //     // return { title: res }
-  //   })
-  // },
+  async asyncData() {
+    let data = {
+      pageSize: 3,
+      pageNum: 0
+    }
+    const res = await postPageReq(data)
+    if (res.data.code !== 200) return
+    let { list, count } = res.data.data
+    return {
+      list,
+      count
+    }
+  },
   methods: {
     ...mapMutations(['setShowRightDom']),
     watchClientWidth() {
@@ -42,6 +59,22 @@ export default {
           this.watchClientWidth()
         }, 100)
       )
+    },
+    async getPageInfo() {
+      let { currentPage, pageSize } = this
+      let data = {
+        pageSize,
+        pageNum: currentPage - 1,
+        data: {}
+      }
+      const res = await postPageReq(data)
+      if (res.data.code !== 200) return
+      let { list, count } = res.data.data
+      this.list = list
+      this.count = count
+    },
+    currentChange() {
+      this.getPageInfo()
     }
   },
   mounted() {
