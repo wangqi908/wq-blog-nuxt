@@ -18,6 +18,7 @@
 <script>
 import { postViewReq } from '@/api'
 export default {
+  name: 'post-view',
   data() {
     return {
       content: '',

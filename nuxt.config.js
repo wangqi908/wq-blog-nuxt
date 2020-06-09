@@ -41,7 +41,7 @@ export default {
     { src: '~/plugins/loading', ssr: false },
     { src: '~/plugins/localStorage.js', ssr: false },
     { src: '~/components', ssr: false },
-    { src: '~/filters', ssr: false }
+    { src: '~/filters' }
   ],
   /*
    ** Nuxt.js dev-modules

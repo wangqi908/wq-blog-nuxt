@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <nuxt-link class="pic" :to="{ name:'post-view', params:{id:info._id}}" v-if="info.banner">
+    <nuxt-link class="pic" :to="{ name:'post-view-id', params:{id:info._id}}" v-if="info.banner">
       <img class="post-pic" :src="info.http+info.banner" alt="博客" />
     </nuxt-link>
     <div class="content">
@@ -9,12 +9,12 @@
         <span>{{info.type|postTypeFilter}}</span>
       </div>
       <div class="title">
-        <nuxt-link :to="{ name:'post-view', params:{id:info._id}}">{{info.title}}</nuxt-link>
+        <nuxt-link :to="{ name:'post-view-id', params:{id:info._id}}">{{info.title}}</nuxt-link>
       </div>
 
       <div class="intro" v-if="info.intro">{{info.intro}}</div>
 
-      <nuxt-link class="btn" :to="{ name:'post-view', params:{id:info._id}}">阅读全文</nuxt-link>
+      <nuxt-link class="btn" :to="{ name:'post-view-id', params:{id:info._id}}">阅读全文</nuxt-link>
     </div>
   </div>
 </template>
