@@ -2,28 +2,17 @@
   <Card class="recent">
     <div class="title">最近更新</div>
     <div class="list-box">
-      <div class="item">
-        <a href="https://github.com/wangqi908" target="_blank">
-          <img class="post-pic" src="@/assets/imgs/avatar.png" alt="博客" />
-        </a>
+      <div class="item" v-for="item in list" :key="item.id">
+        <nuxt-link :to="{ name:'post-view-id', params:{id:item._id}}" v-if="item.banner">
+          <img class="post-pic" :src="item.http+item.banner" alt="博客" />
+        </nuxt-link>
+
         <div class="content">
-          <div class="time">2020-04-01</div>
-          <a href="https://github.com/wangqi908" target="_blank">
-            <div class="post-title">Geng Started with Icacarus</div>
-          </a>
-        </div>
-      </div>
-      <div class="item">
-        <a href="https://github.com/wangqi908" target="_blank">
-          <img class="post-pic" src="@/assets/imgs/avatar.png" alt="博客" />
-        </a>
-        <div class="content">
-          <div class="time">2020-04-01</div>
-          <a href="https://github.com/wangqi908" target="_blank">
-            <div
-              class="post-title"
-            >Geng StartGeng Started with IcacarusGeng Started wng Started with IcacarusGeng Started with Icacarused with Icacarus</div>
-          </a>
+          <div class="time">{{item.createTime|allTimeFilter}}</div>
+
+          <nuxt-link :to="{ name:'post-view-id', params:{id:item._id}}">
+            <div class="post-title">{{item.title}}</div>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -31,13 +20,35 @@
 </template>
 
 <script>
-export default {}
+import { postPageReq } from '@/api'
+export default {
+  data() {
+    return {
+      list: []
+    }
+  },
+  methods: {
+    async getPageInfo() {
+      let data = {
+        pageSize: 3,
+        pageNum: 0
+      }
+      const res = await postPageReq(data)
+      if (res.data.code !== 200) return
+      let { list } = res.data.data
+      this.list = list
+    }
+  },
+  created() {
+    this.getPageInfo()
+  }
+}
 </script>
 
 <style lang='scss' scoped>
 .recent {
   border-radius: 4px;
-  width: 200px;
+  width: 220px;
   margin-bottom: 10px;
 
   .title {
