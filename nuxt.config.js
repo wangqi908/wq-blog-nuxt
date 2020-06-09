@@ -37,9 +37,11 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    { src: '~/plugins/toast', ssr: false },
     { src: '~/plugins/loading', ssr: false },
     { src: '~/plugins/localStorage.js', ssr: false },
-    { src: '~/components', ssr: false }
+    { src: '~/components', ssr: false },
+    { src: '~/filters', ssr: false }
   ],
   /*
    ** Nuxt.js dev-modules

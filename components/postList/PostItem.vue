@@ -1,20 +1,20 @@
 <template>
   <div class="item">
-    <router-link class="pic" :to="{ name:'post-view', params:{id:info._id}}" v-if="info.banner">
+    <nuxt-link class="pic" :to="{ name:'post-view', params:{id:info._id}}" v-if="info.banner">
       <img class="post-pic" :src="info.http+info.banner" alt="博客" />
-    </router-link>
+    </nuxt-link>
     <div class="content">
       <div class="time">
         <span>{{info.createTime|allTimeFilter}}</span>
         <span>{{info.type|postTypeFilter}}</span>
       </div>
       <div class="title">
-        <router-link :to="{ name:'post-view', params:{id:info._id}}">{{info.title}}</router-link>
+        <nuxt-link :to="{ name:'post-view', params:{id:info._id}}">{{info.title}}</nuxt-link>
       </div>
 
       <div class="intro" v-if="info.intro">{{info.intro}}</div>
 
-      <router-link class="btn" :to="{ name:'post-view', params:{id:info._id}}">阅读全文</router-link>
+      <nuxt-link class="btn" :to="{ name:'post-view', params:{id:info._id}}">阅读全文</nuxt-link>
     </div>
   </div>
 </template>
