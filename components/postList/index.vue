@@ -26,6 +26,7 @@ export default {
       pageSize: 3
     }
   },
+
   methods: {
     async getPageInfo() {
       let { currentPage, pageSize } = this

@@ -19,27 +19,10 @@
 import { postViewReq } from '@/api'
 export default {
   name: 'post-view',
-  data() {
-    return {
-      content: '',
-      createTime: '',
-      title: '',
-      type: ''
-    }
-  },
-  methods: {
-    async getInfo() {
-      let _id = this.$route.params.id
-      const res = await postViewReq({ _id })
-      let { content, createTime, title, type } = res.data.data
-      this.content = content
-      this.createTime = createTime
-      this.title = title
-      this.type = type
-    }
-  },
-  created() {
-    this.getInfo()
+  async asyncData({ params }) {
+    const res = await postViewReq({ _id: params.id })
+    let { content, createTime, title, type } = res.data.data
+    return { content, createTime, title, type }
   }
 }
 </script>
