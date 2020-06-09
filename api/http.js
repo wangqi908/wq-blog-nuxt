@@ -1,13 +1,13 @@
-/*
-使用axios 封装的ajax 请求函数
-函数返回的是promise 对象
-*/
+import Vue from 'vue'
 import axios from 'axios'
 export const timeout = 20000 // 设置超时时间
 axios.defaults.timeout = timeout
 axios.defaults.baseURL = '/blog/'
 axios.interceptors.request.use(
   config => {
+    if (process.browser) {
+      Vue.prototype.$loading.show()
+    }
     return config
   },
   error => {
@@ -17,6 +17,9 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   response => {
+    if (process.browser) {
+      Vue.prototype.$loading.hide()
+    }
     return response
   },
   error => {

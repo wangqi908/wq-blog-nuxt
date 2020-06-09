@@ -46,11 +46,6 @@ export default {
   },
   mounted() {
     this.handleClientWidth()
-
-    // propListReq({}).then(res => {
-    //   console.log(res)
-    //   // return { title: res }
-    // })
   }
 }
 </script>

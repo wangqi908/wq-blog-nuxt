@@ -1,4 +1,4 @@
-import req from './http.js'
+import req from './http'
 export const uploadReq = params => req('/upload', params, 'upload') //文件上传
 export const captcha = () => req('/captcha') //验证码
 export const loginReq = params => req('/login', params, 'post') //登录

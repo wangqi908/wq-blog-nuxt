@@ -2,7 +2,8 @@ export default {
   mode: 'universal',
   proxy: {
     '/blog': {
-      target: 'http://127.0.0.1/blog',
+      // target: 'http://127.0.0.1/blog',
+      target: 'http://192.168.10.106/blog',
       changeOrigin: true,
       pathRewrite: { '^/blog/': '' }
     }
@@ -35,7 +36,6 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  // plugins: ['~/plugins/loading'],
   plugins: [
     { src: '~/plugins/loading', ssr: false },
     { src: '~/plugins/localStorage.js', ssr: false },

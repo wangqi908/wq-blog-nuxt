@@ -12,7 +12,8 @@ export default {
   methods: {
     ...mapMutations(['increment']),
     test() {
-      this.increment()
+      // this.increment()
+      this.$toast.show('Logging in...')
     }
   }
 }
