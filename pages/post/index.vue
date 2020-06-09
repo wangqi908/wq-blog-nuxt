@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { postPageReq } from '@/api'
 import { Pagination, PostItem } from '@/components'
 export default {
@@ -21,13 +22,12 @@ export default {
     return {
       list: [],
       count: '',
-      currentPage: 1,
-      pageSize: 3
+      currentPage: 1
     }
   },
-  async asyncData() {
+  async asyncData({ store }) {
     let data = {
-      pageSize: 3,
+      pageSize: store.state.pageSize,
       pageNum: 0
     }
     const res = await postPageReq(data)
@@ -55,6 +55,9 @@ export default {
     currentChange() {
       this.getPageInfo()
     }
+  },
+  computed: {
+    ...mapState(['pageSize'])
   }
 }
 </script>

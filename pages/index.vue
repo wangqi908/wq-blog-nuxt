@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { postPageReq } from '@/api'
 import { mapMutations } from 'vuex'
 import { LeftSide, RightSide, PostItem, Pagination } from '@/components'
@@ -28,13 +29,12 @@ export default {
       smallWidth: 950,
       list: [],
       count: '',
-      currentPage: 1,
-      pageSize: 3
+      currentPage: 1
     }
   },
-  async asyncData() {
+  async asyncData({ store }) {
     let data = {
-      pageSize: 3,
+      pageSize: store.state.pageSize,
       pageNum: 0
     }
     const res = await postPageReq(data)
@@ -79,6 +79,9 @@ export default {
   },
   mounted() {
     this.handleClientWidth()
+  },
+  computed: {
+    ...mapState(['pageSize'])
   }
 }
 </script>

@@ -3,7 +3,8 @@ import { propListReq } from '@/api'
 export const state = () => ({
   counter: 0,
   isShowRightDom: false,
-  propList: []
+  propList: [],
+  pageSize: 4
 })
 
 export const mutations = {
