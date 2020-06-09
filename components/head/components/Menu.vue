@@ -4,7 +4,8 @@
       :to="item.path"
       v-for="item in menuList"
       :key="item.id"
-      class="item add-transition"
+      :class="['item add-transition',parentName===item.path?'nuxt-link-active':'']"
+      exact
     >{{item.title}}</nuxt-link>
   </div>
 </template>
@@ -12,8 +13,21 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  data() {
+    return {
+      parentName: ''
+    }
+  },
   computed: {
     ...mapState('menu', ['menuList'])
+  },
+  created() {
+    this.parentName = '/' + this.$route.fullPath.split('/')[1]
+  },
+  watch: {
+    $route(to) {
+      this.parentName = '/' + to.fullPath.split('/')[1]
+    }
   }
 }
 </script>
@@ -38,7 +52,7 @@ export default {
     background-color: #ebebeb;
   }
 }
-.nuxt-link-exact-active {
+.nuxt-link-active {
   background-color: $bgc;
   color: $active;
 }
