@@ -19,10 +19,16 @@
 import { postViewReq } from '@/api'
 export default {
   name: 'post-view',
+  head() {
+    return {
+      title: this.title,
+      meta: [{ name: this.title, content: this.intro || '' }]
+    }
+  },
   async asyncData({ params }) {
     const res = await postViewReq({ _id: params.id })
-    let { content, createTime, title, type } = res.data.data
-    return { content, createTime, title, type }
+    let { content, createTime, title, type, intro } = res.data.data
+    return { content, createTime, title, type, intro }
   }
 }
 </script>

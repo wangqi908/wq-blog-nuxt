@@ -18,6 +18,11 @@ import { Pagination, PostItem } from '@/components'
 export default {
   name: 'postList',
   components: { Pagination, PostItem },
+  head() {
+    return {
+      title: '文章列表'
+    }
+  },
   data() {
     return {
       list: [],
